@@ -12,6 +12,22 @@ public class Joueur extends Classes.Classes {
         this.nomJoueur = nomJoueur;
     }
 
+    public String getNom() {
+        return nomClasse;
+    }
+
+    public void setNom(String nom) {
+        this.nomClasse = nomClasse;
+    }
+
+    public String getNomJoueur() {
+        return nomJoueur;
+    }
+
+    public void setNomJoueur(String nomJoueur) {
+        this.nomJoueur = nomJoueur;
+    }
+
     public void choisirNomJoueur() {
         Scanner sc = new Scanner(System.in);
 
@@ -56,13 +72,13 @@ public class Joueur extends Classes.Classes {
     }
 
     private void validationClasse() {
-        System.out.println("Voulez vous garder votre classe (Oui/Non): ");
+        System.out.println("Voulez vous garder votre classe (oui/non): ");
         Scanner sc2 = new Scanner(System.in);
         String reponse = sc2.nextLine();
-        if (reponse.equals("Non")) {
+        if (reponse.equals("non")) {
             choisirUneClasse();
         }
-        else if (!reponse.equals("Oui")) {
+        else if (!reponse.equals("oui")) {
             System.out.println("Réponse invalide");
             validationClasse();
         }
