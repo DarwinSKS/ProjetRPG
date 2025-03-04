@@ -5,8 +5,6 @@ public class Main {
 
         Joueur joueurtest = new Joueur();
         joueurtest.choisirNomJoueur();
-        joueurtest.afficherNomJoueur();
         joueurtest.choisirUneClasse();
-
     }
 }

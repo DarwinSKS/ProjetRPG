@@ -2,6 +2,7 @@ package Joueur;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -9,109 +10,91 @@ public class JoueurTest {
 
     @Test
     public void testNomValide() {
-        Joueur joueur = new Joueur("NomJoueur", "Guerrier", 100, 50, 10, 10, 10, 10, 10, 10, 10);
+        Joueur joueur = new Joueur();
+        String input = "Test";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        joueur.choisirNomJoueur("ValidName");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+        System.setOut(printStream);
 
-        assertEquals("ValidName", joueur.getNomJoueur());
+        joueur.choisirNomJoueur();
+        joueur.afficherNomJoueur();
+
+        assertTrue(outputStream.toString().contains("Votre nom : Test"));
+
+        System.setOut(System.out);
     }
 
     @Test
     public void testNomTropCourt() {
-        Joueur joueur = new Joueur("NomJoueur", "Guerrier", 100, 50, 10, 10, 10, 10, 10, 10, 10);
+        Joueur joueur = new Joueur();
+        String inputTropCourt = "Te";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            joueur.choisirNomJoueur("AB");
-        });
+        System.setIn(new ByteArrayInputStream(inputTropCourt.getBytes()));
 
-        assertEquals("Le nom doit avoir entre 3 et 20 caractères.", exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, joueur::choisirNomJoueur);
+
+        assertTrue(exception.getMessage().contains("Le nom doit avoir entre 3 et 20 caractères."));
     }
 
     @Test
-    public void testNomTropLong() {
-        Joueur joueur = new Joueur("NomJoueur", "Guerrier", 100, 50, 10, 10, 10, 10, 10, 10, 10);
+    public void testNomTropLong(){
+        Joueur joueur = new Joueur();
+        String inputTropLong = "aaaaaaaaaaaaaaaaaaaaa";
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            joueur.choisirNomJoueur("ThisNameIsWayTooLong");
-        });
+        System.setIn(new ByteArrayInputStream(inputTropLong.getBytes()));
 
-        assertEquals("Le nom doit avoir entre 3 et 20 caractères.", exception.getMessage());
+        Exception exception = assertThrows(IllegalArgumentException.class, joueur::choisirNomJoueur);
+
+        assertTrue(exception.getMessage().contains("Le nom doit avoir entre 3 et 20 caractères."));
     }
 
     @Test
-    public void testSelectionClasseValide() {
-        Joueur joueur = new Joueur("NomJoueur", "Guerrier", 100, 50, 10, 10, 10, 10, 10, 10, 10);
+    public void testNomAvecChiffres() {
+        Joueur joueur = new Joueur();
+        String inputChiffres = "Test123";
 
-        joueur.choisirUneClasse("Guerrier");
+        System.setIn(new ByteArrayInputStream(inputChiffres.getBytes()));
 
-        assertEquals("Guerrier", joueur.getNomClasse());
+        Exception exception = assertThrows(IllegalArgumentException.class, joueur::choisirNomJoueur);
+
+        assertTrue(exception.getMessage().contains("Le nom ne doit contenir que des lettres."));
     }
 
-    // Test d'acceptation 5.1 : Affichage du récapitulatif du personnage
     @Test
-    public void testAffichageRécapitulatif() {
-        Joueur joueur = new Joueur("NomJoueur", "Guerrier", 100, 50, 10, 10, 10, 10, 10, 10, 10);
+    public void testChoisirUneClasseValide() {
+        Joueur joueur = new Joueur();
+        String input = "guerrier\noui";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        joueur.choisirNomJoueur("ValidName");
-        joueur.choisirUneClasse("Guerrier");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        System.setOut(ps);
+        joueur.choisirUneClasse();
 
-        joueur.afficherNomJoueur();
-        joueur.afficherDetailClasse();
+        assertTrue(outputStream.toString().contains("La partie peut commencer !"));
 
-        String output = baos.toString();
-
-        assertTrue(output.contains("Votre nom : ValidName"));
-        assertTrue(output.contains("Détail de votre classe :"));
+        System.setOut(System.out);
+        System.setIn(System.in);
     }
 
-    public class Joueur extends Classes.Classes {
-        private String nomClasse;
-        private String nomJoueur;
+    @Test
+    public void testChoisirUneClasseInvalide() {
+        Joueur joueur = new Joueur();
+        String input = "test\nvoleur\noui";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        public Joueur(String nom, String classeNom, int pv, int pm, int force, int intelligence, int def, int resMagique, int agilite, int chance, int end) {
-            super(classeNom, pv, pm, force, intelligence, def, resMagique, agilite, chance, end, 10);  // Supposons que esprit est un champ dans la superclasse
-            this.nomClasse = classeNom;
-            this.nomJoueur = nom;
-        }
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
 
-        public void choisirNomJoueur(String nom) {
-            if (nom.length() < 3 || nom.length() > 20) {
-                throw new IllegalArgumentException("Le nom doit avoir entre 3 et 20 caractères.");
-            }
+        joueur.choisirUneClasse();
 
-            if (!nom.matches("[a-zA-Z]+")) {
-                throw new IllegalArgumentException("Le nom ne doit contenir que des lettres.");
-            }
+        assertTrue(outputStream.toString().contains("Classe invalide. Veuillez réessayer."));
 
-            this.nomJoueur = nom;
-        }
+        System.setOut(System.out);
+        System.setIn(System.in);
 
-        public String getNomJoueur() {
-            return nomJoueur;
-        }
-
-        public void choisirUneClasse(String classe) {
-            if (classe.equals("Guerrier") || classe.equals("Mage") || classe.equals("Voleur")) {
-                this.nomClasse = classe;
-            } else {
-                throw new IllegalArgumentException("Classe invalide");
-            }
-        }
-
-        public String getNomClasse() {
-            return nomClasse;
-        }
-
-        public void afficherNomJoueur() {
-            System.out.println("Votre nom : " + nomJoueur);
-        }
-
-        public void afficherDetailClasse() {
-            System.out.println("Détail de votre classe : " + nomClasse);
-        }
     }
+
 }
