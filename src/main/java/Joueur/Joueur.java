@@ -8,25 +8,11 @@ public class Joueur extends Classes.Classes {
 
     public Joueur(String nom, String classeNom, int pv, int pm, int force, int intelligence, int def, int resMagique, int agilite, int chance, int end, int esprit) {
         super(classeNom, pv, pm, force, intelligence, def, resMagique, agilite, chance, end, esprit);
-        this.nomClasse = nomClasse;
-        this.nomJoueur = nomJoueur;
+        this.nomClasse = classeNom;
+        this.nomJoueur = nom;
     }
 
-    public String getNom() {
-        return nomClasse;
-    }
-
-    public void setNom(String nom) {
-        this.nomClasse = nomClasse;
-    }
-
-    public String getNomJoueur() {
-        return nomJoueur;
-    }
-
-    public void setNomJoueur(String nomJoueur) {
-        this.nomJoueur = nomJoueur;
-    }
+    public Joueur(){}
 
     public void choisirNomJoueur() {
         Scanner sc = new Scanner(System.in);
