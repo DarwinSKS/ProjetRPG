@@ -3,21 +3,21 @@ package Joueur;
 import java.util.Scanner;
 
 public class Joueur extends Classes.Classes {
-    private String nom; // Nom de la classe
-    private String nomJoueur; // Nom du joueur
+    private String nomClasse;
+    private String nomJoueur;
 
     public Joueur(String nom, String classeNom, int pv, int pm, int force, int intelligence, int def, int resMagique, int agilite, int chance, int end, int esprit) {
         super(classeNom, pv, pm, force, intelligence, def, resMagique, agilite, chance, end, esprit);
-        this.nom = nom; // Initialisation du nom de la classe
-        this.nomJoueur = nomJoueur; // Initialisation du nom du joueur
+        this.nomClasse = nomClasse;
+        this.nomJoueur = nomJoueur;
     }
 
     public String getNom() {
-        return nom;
+        return nomClasse;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nomClasse = nomClasse;
     }
 
     public String getNomJoueur() {
@@ -35,12 +35,11 @@ public class Joueur extends Classes.Classes {
             System.out.println("Nom : ");
             nomJoueur = sc.nextLine();
 
-            // Vérification de la longueur du nom
             if (nomJoueur.length() < 3 || nomJoueur.length() > 20) {
                 System.out.println("Le nom doit avoir entre 3 et 20 caractères.");
                 continue;
             }
-            // Vérification des caractères autorisés (lettres, chiffres, tirets, underscores)
+
             if (!nomJoueur.matches("[a-zA-Z]+")) {
                 System.out.println("Le nom ne doit contenir que des lettres.");
                 continue;
@@ -59,9 +58,9 @@ public class Joueur extends Classes.Classes {
         afficherClasses();
         Scanner sc = new Scanner(System.in);
         System.out.println("Choisir une classe : ");
-        nom = sc.nextLine();
-        if (nom.equals("Guerrier") || nom.equals("Mage") || nom.equals("Voleur")) {
-            selectionnerClasse(nom);
+        nomClasse = sc.nextLine();
+        if (nomClasse.equals("Guerrier") || nomClasse.equals("Mage") || nomClasse.equals("Voleur")) {
+            selectionnerClasse(nomClasse);
         }
         else {
             System.out.println("Classe invalide: ");
@@ -78,14 +77,15 @@ public class Joueur extends Classes.Classes {
         String reponse = sc2.nextLine();
         if (reponse.equals("non")) {
             choisirUneClasse();
-        } else if (!reponse.equals("oui")) {
+        }
+        else if (!reponse.equals("oui")) {
             System.out.println("Réponse invalide");
             validationClasse();
-        } else {
+        }
+        else {
+            afficherNomJoueur();
+            afficherDetailClasse();
             System.out.println("La partie peut commencer !");
         }
-
     }
 }
-
-
