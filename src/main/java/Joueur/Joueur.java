@@ -12,22 +12,6 @@ public class Joueur extends Classes.Classes {
         this.nomJoueur = nomJoueur;
     }
 
-    public String getNom() {
-        return nomClasse;
-    }
-
-    public void setNom(String nom) {
-        this.nomClasse = nomClasse;
-    }
-
-    public String getNomJoueur() {
-        return nomJoueur;
-    }
-
-    public void setNomJoueur(String nomJoueur) {
-        this.nomJoueur = nomJoueur;
-    }
-
     public void choisirNomJoueur() {
         Scanner sc = new Scanner(System.in);
 
