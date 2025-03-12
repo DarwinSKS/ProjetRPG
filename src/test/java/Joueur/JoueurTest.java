@@ -32,7 +32,7 @@ public class JoueurTest {
         Joueur joueur = new Joueur("NomJoueur", "Guerrier", 100, 50, 10, 10, 10, 10, 10, 10, 10);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            joueur.choisirNomJoueur("ThisNameIsWayTooLong");
+            joueur.choisirNomJoueur("ThisNameIsWayTooLongS");
         });
 
         assertEquals("Le nom doit avoir entre 3 et 20 caractères.", exception.getMessage());
@@ -47,7 +47,6 @@ public class JoueurTest {
         assertEquals("Guerrier", joueur.getNomClasse());
     }
 
-    // Test d'acceptation 5.1 : Affichage du récapitulatif du personnage
     @Test
     public void testAffichageRécapitulatif() {
         Joueur joueur = new Joueur("NomJoueur", "Guerrier", 100, 50, 10, 10, 10, 10, 10, 10, 10);
