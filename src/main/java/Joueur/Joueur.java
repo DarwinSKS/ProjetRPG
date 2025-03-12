@@ -3,46 +3,28 @@ package Joueur;
 import java.util.Scanner;
 
 public class Joueur extends Classes.Classes {
-    private String nomClasse;
     private String nomJoueur;
 
     public Joueur(String nom, String classeNom, int pv, int pm, int force, int intelligence, int def, int resMagique, int agilite, int chance, int end, int esprit) {
         super(classeNom, pv, pm, force, intelligence, def, resMagique, agilite, chance, end, esprit);
-        this.nomClasse = nomClasse;
-        this.nomJoueur = nomJoueur;
+        this.nomJoueur = nom;
     }
 
-    public String getNom() {
-        return nomClasse;
-    }
-
-    public void setNom(String nom) {
-        this.nomClasse = nomClasse;
-    }
-
-    public String getNomJoueur() {
-        return nomJoueur;
-    }
-
-    public void setNomJoueur(String nomJoueur) {
-        this.nomJoueur = nomJoueur;
-    }
+    public Joueur(){}
 
     public void choisirNomJoueur() {
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        while(true) {
             System.out.println("Nom : ");
             nomJoueur = sc.nextLine();
 
             if (nomJoueur.length() < 3 || nomJoueur.length() > 20) {
-                System.out.println("Le nom doit avoir entre 3 et 20 caractères.");
-                continue;
+                throw new IllegalArgumentException("Le nom doit avoir entre 3 et 20 caractères.");
             }
 
             if (!nomJoueur.matches("[a-zA-Z]+")) {
-                System.out.println("Le nom ne doit contenir que des lettres.");
-                continue;
+                throw new IllegalArgumentException("Le nom ne doit contenir que des lettres.");
             }
 
             break;
@@ -56,36 +38,46 @@ public class Joueur extends Classes.Classes {
     public void choisirUneClasse() {
         System.out.println("Liste des classes: ");
         afficherClasses();
+
         Scanner sc = new Scanner(System.in);
-        System.out.println("Choisir une classe : ");
-        nomClasse = sc.nextLine();
-        if (nomClasse.equals("Guerrier") || nomClasse.equals("Mage") || nomClasse.equals("Voleur")) {
-            selectionnerClasse(nomClasse);
-        }
-        else {
-            System.out.println("Classe invalide: ");
-            choisirUneClasse();
-        }
+        String nomClasse;
+
+        do {
+            System.out.println("Choisir une classe (guerrier, mage, voleur) : ");
+            nomClasse = sc.nextLine().toLowerCase();
+
+            if (nomClasse.equals("guerrier") || nomClasse.equals("mage") || nomClasse.equals("voleur")) {
+                selectionnerClasse(nomClasse);
+                break;
+            } else {
+                System.out.println("Classe invalide. Veuillez réessayer.");
+            }
+        } while (true);
+
         System.out.println("Détail de votre classe : ");
         afficherDetailClasse();
-        validationClasse();
+
+        validationClasse(sc);
     }
 
-    private void validationClasse() {
-        System.out.println("Voulez vous garder votre classe (oui/non): ");
-        Scanner sc2 = new Scanner(System.in);
-        String reponse = sc2.nextLine();
-        if (reponse.equals("non")) {
-            choisirUneClasse();
-        }
-        else if (!reponse.equals("oui")) {
-            System.out.println("Réponse invalide");
-            validationClasse();
-        }
-        else {
-            afficherNomJoueur();
-            afficherDetailClasse();
-            System.out.println("La partie peut commencer !");
-        }
+    private void validationClasse(Scanner sc) {
+        String reponse;
+
+        do {
+            System.out.println("Voulez-vous garder votre classe (oui/non) ? ");
+            reponse = sc.nextLine().toLowerCase();
+
+            if (reponse.equals("oui")) {
+                afficherNomJoueur();
+                afficherDetailClasse();
+                System.out.println("La partie peut commencer !");
+                break;
+            } else if (reponse.equals("non")) {
+                choisirUneClasse();
+                break;
+            } else {
+                System.out.println("Réponse invalide. Veuillez répondre par 'oui' ou 'non'.");
+            }
+        } while (true);
     }
 }
