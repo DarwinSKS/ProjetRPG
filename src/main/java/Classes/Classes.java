@@ -54,12 +54,14 @@ public class Classes {
     }
 
     public void selectionnerClasse(String nom) {
-        if (!nom.equals("Guerrier") && !nom.equals("Mage") && !nom.equals("Voleur")) {
+        nom = nom.toLowerCase();
+
+        if (!nom.equals("guerrier") && !nom.equals("mage") && !nom.equals("voleur")) {
             throw new IllegalArgumentException("Classe inconnue : " + nom);
         }
 
         switch (nom) {
-            case "Guerrier":
+            case "guerrier":
                 this.nom = "Guerrier";
                 this.pv = 150;
                 this.pm = 50;
@@ -72,7 +74,7 @@ public class Classes {
                 this.end = 10;
                 this.esprit = 4;
                 break;
-            case "Mage":
+            case "mage":
                 this.nom = "Mage";
                 this.pv = 90;
                 this.pm = 150;
@@ -85,7 +87,7 @@ public class Classes {
                 this.end = 5;
                 this.esprit = 10;
                 break;
-            case "Voleur":
+            case "voleur":
                 this.nom = "Voleur";
                 this.pv = 110;
                 this.pm = 70;
