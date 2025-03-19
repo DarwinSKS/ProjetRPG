@@ -1,14 +1,15 @@
 package Donjon;
 
+import Joueur.JoueurBase;
+
 import java.util.*;
-import Joueur.Joueur;
 
 public class Exploration {
-    private Joueur joueur;
+    private JoueurBase joueur;
     private Salle position;
     private Scanner scanner = new Scanner(System.in);
 
-    public Exploration(Joueur joueur, Salle depart) {
+    public Exploration(JoueurBase joueur, Salle depart) {
         this.joueur = joueur;
         this.position = depart;
     }

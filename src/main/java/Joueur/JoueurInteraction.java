@@ -1,49 +1,39 @@
 package Joueur;
 
+import Classes.*;
+
 import java.util.Scanner;
 
-public class JoueurInteraction extends Joueur{
+public abstract class JoueurInteraction implements JoueurInterac {
     private Scanner sc;
+    private ClasseAffichage classeAffichage;
 
-    public JoueurInteraction(Scanner sc) {
-        this.sc = sc;
+    public JoueurInteraction(Scanner scanner) {
+        this.sc = scanner;
     }
 
+    @Override
     public String choisirNomJoueur() {
-        String nomJoueur;
-        while (true) {
-            System.out.println("Nom : ");
-            nomJoueur = sc.nextLine();
-
-            if (nomJoueur.length() < 3 || nomJoueur.length() > 20) {
-                throw new IllegalArgumentException("Le nom doit avoir entre 3 et 20 caractères.");
-            }
-
-            if (!nomJoueur.matches("[a-zA-Z]+")) {
-                throw new IllegalArgumentException("Le nom ne doit contenir que des lettres.");
-            }
-
-            break;
-        }
-        return nomJoueur;
+        System.out.println("Entrez votre nom : ");
+        return sc.nextLine();
     }
 
-    public String choisirUneClasse() {
-        System.out.println("Liste des classes: ");
-        afficherClasses();
-
-        String nomClasse;
-        do {
-            System.out.println("Choisir une classe (guerrier, mage, voleur) : ");
-            nomClasse = sc.nextLine().toLowerCase();
-
-            if (nomClasse.equals("guerrier") || nomClasse.equals("mage") || nomClasse.equals("voleur")) {
-                break;
-            } else {
-                System.out.println("Classe invalide. Veuillez réessayer.");
-            }
-        } while (true);
-
-        return nomClasse;
+    @Override
+    public ClasseBase choisirUneClasse() {
+        System.out.println("Liste des classes disponibles : ");
+        classeAffichage.afficherClasses();
+        System.out.println("Choisissez votre classe : ");
+        String nomClasse = sc.nextLine();
+        switch (nomClasse) {
+            case "guerrier":
+                return new ClasseGuerrier();
+            case "mage":
+                return new ClasseMage();
+            case "voleur":
+                return new ClasseVoleur();
+            default:
+                System.out.println("Classe non reconnue.");
+                return null;
+        }
     }
 }

@@ -9,7 +9,6 @@ public class ClasseVoleur extends ClasseBase{
     public void selectionnerClasse(String nom) {
         if (nom.equalsIgnoreCase("voleur")) {
             System.out.println("La classe 'Voleur' est sélectionnée.\nVoici le détail de la classe : \n");
-            afficherDetailClasse();
         } else {
             System.out.println("Classe non reconnue.");
         }
