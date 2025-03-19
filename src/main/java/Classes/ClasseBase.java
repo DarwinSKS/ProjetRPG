@@ -27,6 +27,7 @@ public abstract class ClasseBase implements Classe {
         this.esprit = esprit;
     }
 
+    @Override
     public void afficherDetailClasse() {
         System.out.println("Nom : " + nom);
         System.out.println("PV : " + pv);
@@ -41,6 +42,7 @@ public abstract class ClasseBase implements Classe {
         System.out.println("Esprit : " + esprit);
     }
 
+    @Override
     public void afficherClasses() {
         System.out.println("Guerrier");
         System.out.println("Mage");
