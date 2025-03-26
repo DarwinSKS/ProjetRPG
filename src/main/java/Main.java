@@ -1,20 +1,23 @@
-import java.util.Random;
+import Joueur.*;
+import Donjon.*;
+import Classes.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //Scanner scanner = new Scanner(System.in);
-        //JoueurInteraction joueurInteraction = new JoueurInteraction(scanner);
-        //joueurInteraction.choisirNomJoueur();
-
-        //Joueur22 joueurtest = new Joueur22();
-        //joueurtest.selectionnerClasse(joueurInteraction.choisirUneClasse());
-
-        //Random random = new Random();
-        //int nombreSalles = random.nextInt(6) + 5;
-        //System.out.println("Le donjon aura " + nombreSalles + " salles.");
-        //Donjon donjon = new Donjon(nombreSalles);
-        //Exploration exploration = new Exploration(joueurtest, donjon.salles.get(0));
-        //exploration.explorer();
+        Scanner scanner = new Scanner(System.in);
+        JoueurInteraction joueurInteraction = new JoueurInteraction(scanner);
+        String nomJoueur = joueurInteraction.choisirNomJoueur();
+        ClasseBase classeJoueur = joueurInteraction.choisirUneClasse();
+        JoueurBase joueur = new JoueurBase(nomJoueur, classeJoueur);
+        //JoueurAffich joueurAffich = new JoueurAffich(joueur, new ClasseAffichage(new ClasseGestion() {}));
+        //joueurAffich.afficherNomJoueur();
+        //joueurAffich.afficherClasse();
+        int largeur = 5;
+        int hauteur = 5;
+        DonjonGrilleGest donjon = new DonjonGrilleGest(largeur, hauteur);
+        DonjonCase caseActuelle = donjon.obtenirCase(2, 3);
+        caseActuelle.interaction(joueur);
+        scanner.close();
     }
 }

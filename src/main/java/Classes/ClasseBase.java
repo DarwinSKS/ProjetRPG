@@ -1,5 +1,7 @@
 package Classes;
 
+import java.util.Objects;
+
 public abstract class ClasseBase implements ClasseStats {
     protected String nomClasse;
     protected int pv;
@@ -25,6 +27,35 @@ public abstract class ClasseBase implements ClasseStats {
         this.chance = chance;
         this.end = end;
         this.esprit = esprit;
+    }
+
+    @Override
+    public void perteVie(int pv) {
+        this.pv -= pv;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ClasseBase that = (ClasseBase) obj;
+        return Objects.equals(nomClasse, that.nomClasse) &&
+                pv == that.pv &&
+                pm == that.pm &&
+                force == that.force &&
+                intelligence == that.intelligence &&
+                def == that.def &&
+                resMagique == that.resMagique &&
+                agilite == that.agilite &&
+                chance == that.chance &&
+                end == that.end &&
+                esprit == that.esprit;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nomClasse);
     }
 
 }

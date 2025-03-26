@@ -6,4 +6,5 @@ public interface JoueurInterac {
     String choisirNomJoueur();
     ClasseBase choisirUneClasse();
 
+
 }

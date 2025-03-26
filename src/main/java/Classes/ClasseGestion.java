@@ -3,7 +3,7 @@ package Classes;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ClasseGestion implements ClasseList {
+public abstract class ClasseGestion implements ClasseGest {
     private List<String> listeClasses = new ArrayList<>();
 
     public ClasseGestion() {
@@ -21,4 +21,5 @@ public abstract class ClasseGestion implements ClasseList {
     public void ajouterClasse(String nom) {
         listeClasses.add(nom);
     }
-}
+
+    }
