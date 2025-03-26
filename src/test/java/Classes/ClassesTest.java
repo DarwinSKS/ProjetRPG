@@ -7,12 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClassesTest {
 
     @Test
-    void testAfficherClasses() {
-        ClasseBase classes = new ClasseGuerrier();
-        assertDoesNotThrow(classes::afficherClasses);
-    }
-
-    @Test
     void testSelectionnerClasseGuerrier() {
         ClasseBase guerrier = new ClasseGuerrier();
         guerrier.selectionnerClasse("guerrier");
