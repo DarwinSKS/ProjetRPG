@@ -10,7 +10,7 @@ public class ClasseVoleur extends ClasseBase{
         if (nom.equalsIgnoreCase("voleur")) {
             System.out.println("La classe 'Voleur' est sélectionnée.\nVoici le détail de la classe : \n");
         } else {
-            System.out.println("Classe non reconnue.");
+            throw new IllegalArgumentException("Classe non reconnue.");
         }
     }
 }

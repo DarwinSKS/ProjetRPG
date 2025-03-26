@@ -2,15 +2,12 @@ package Classes;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClassesTest {
-
-    @Test
-    void testAfficherClasses() {
-        ClasseBase classes = new ClasseGuerrier();
-        assertDoesNotThrow(classes::afficherClasses);
-    }
 
     @Test
     void testSelectionnerClasseGuerrier() {

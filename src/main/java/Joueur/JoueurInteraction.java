@@ -4,7 +4,7 @@ import Classes.*;
 
 import java.util.Scanner;
 
-public abstract class JoueurInteraction implements JoueurInterac {
+public class JoueurInteraction implements JoueurInterac {
     private Scanner sc;
     private ClasseAffichage classeAffichage;
 

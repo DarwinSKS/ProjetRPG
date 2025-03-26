@@ -8,9 +8,9 @@ public class ClasseGuerrier extends ClasseBase {
     @Override
     public void selectionnerClasse(String nom) {
         if (nom.equalsIgnoreCase("guerrier")) {
-            System.out.println("La classe 'Guerrier' est sélectionnée./nVoici le détail de la classe : /n");
+            System.out.println("La classe 'Guerrier' est sélectionnée.\nVoici le détail de la classe : \n");
         } else {
-            System.out.println("Classe non reconnue.");
+            throw new IllegalArgumentException("Classe non reconnue.");
         }
     }
 }

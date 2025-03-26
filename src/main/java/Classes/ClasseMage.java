@@ -10,7 +10,7 @@ public class ClasseMage extends ClasseBase {
         if (nom.equalsIgnoreCase("mage")) {
             System.out.println("La classe 'Mage' est sélectionnée.\nVoici le détail de la classe : \n");
         } else {
-            System.out.println("Classe non reconnue.");
+            throw new IllegalArgumentException("Classe non reconnue.");
         }
     }
 }
